@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       case 'dggpre':
         header('Location: dashboard.php'); break;
       case 'onas':
-        header('Location: onas_home.php'); break; // à créer
+        header('Location: alertes_onas.php'); break; // à créer
     }
     exit;
   } else {

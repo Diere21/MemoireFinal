@@ -25,6 +25,7 @@ if (isset($_POST['new_user'])) {
 // Ajouter infos capteur
 if (isset($_POST['new_capteur'])) {
     $code = $_POST['code'] ?? '';
+    $zone = $_POST['zone'] ?? '';
     $niveau_statique = $_POST['niveau_statique'] ?? '';
     $type_ouvrage = $_POST['type_ouvrage'] ?? '';
     $aquifere = $_POST['aquifere'] ?? '';
@@ -34,8 +35,8 @@ if (isset($_POST['new_capteur'])) {
         $check->execute([$code]);
 
         if ($check->rowCount() === 0) {
-            $stmt = $pdo->prepare("INSERT INTO capteurs (code, niveau_statique, type_ouvrage, aquifere) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$code, $niveau_statique, $type_ouvrage, $aquifere]);
+            $stmt = $pdo->prepare("INSERT INTO capteurs (code, zone, niveau_statique, type_ouvrage, aquifere) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$code, $zone, $niveau_statique, $type_ouvrage, $aquifere]);
             $message = "✅ Informations du capteur ajoutées.";
         } else {
             $message = "⚠️ Ce capteur est déjà enregistré.";
@@ -105,6 +106,10 @@ include 'template.php';
               </select>
             </div>
             <div class="mb-3">
+              <label class="form-label">Zone</label>
+              <input type="text" name="zone" class="form-control" required placeholder="ex: Yoff, Grand-Yoff, Camberène">
+            </div>
+            <div class="mb-3">
               <label class="form-label">Niveau statique (m)</label>
               <input type="number" step="0.01" name="niveau_statique" class="form-control" required>
             </div>
@@ -135,6 +140,5 @@ include 'template.php';
   <a href="logout.php" class="btn btn-danger">Se déconnecter</a>
 </div>
 
-</div>
 </body>
 </html>
