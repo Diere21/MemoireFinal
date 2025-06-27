@@ -1,11 +1,11 @@
 <?php
 require 'connexion.php';
-if (!is_onas()) {
+if (!is_onas_like()) {
     header("Location: login.php");
     exit;
 }
 
-$page_title = "Alertes - ONAS";
+$page_title = "Alertes Inondations";
 
 // Requête pour récupérer les alertes avec infos capteurs
 $stmt = $pdo->query("
@@ -21,7 +21,7 @@ include 'template.php';
 
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3>Alertes - Agent ONAS</h3>
+    <h3>Alertes - Inondations</h3>
     <a href="logout.php" class="btn btn-danger">Se déconnecter</a>
   </div>
 

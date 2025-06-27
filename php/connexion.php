@@ -39,7 +39,8 @@ function is_dgpree() {
     return is_logged_in() && $_SESSION['user']['role'] === 'dggpre';
 }
 
-function is_onas() {
-    return is_logged_in() && $_SESSION['user']['role'] === 'onas';
+function is_onas_like() {
+    return is_logged_in() && in_array($_SESSION['user']['role'], ['onas', 'da', 'dra', 'hydraulique', 'interieur']);
 }
+
 ?>

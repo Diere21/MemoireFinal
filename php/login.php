@@ -7,13 +7,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (login($_POST['username'], $_POST['password'])) {
     // Rediriger automatiquement selon le rôle
     switch ($_SESSION['user']['role']) {
-      case 'admin':
+    case 'admin':
         header('Location: admin_panel.php'); break;
-      case 'dggpre':
+    case 'dggpre':
         header('Location: dashboard.php'); break;
-      case 'onas':
-        header('Location: alertes_onas.php'); break; // à créer
-    }
+    case 'onas':
+    case 'da':
+    case 'dra':
+    case 'hydraulique':
+    case 'interieur':
+        header('Location: alertes_onas.php'); break;
+  }
+
     exit;
   } else {
     $error = "Identifiants invalides";

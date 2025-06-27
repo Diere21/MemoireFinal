@@ -14,11 +14,13 @@ if (isset($_POST['new_user'])) {
     $password = $_POST['password'] ?? '';
     $role = $_POST['role'] ?? '';
 
-    if ($username && $password && in_array($role, ['dggpre', 'onas'])) {
+    if ($username && $password && in_array($role, ['dggpre', 'onas', 'da', 'dra', 'hydraulique', 'interieur'])) {
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $pdo->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
         $stmt->execute([$username, $hash, $role]);
         $message = "✅ Utilisateur créé.";
+    } else {
+        $message = "⚠️ Rôle invalide ou données incomplètes.";
     }
 }
 
@@ -81,6 +83,10 @@ include 'template.php';
                 <option value="">-- Choisir --</option>
                 <option value="dggpre">Agent DGPRE</option>
                 <option value="onas">Agent ONAS</option>
+                <option value="da">Agent DA</option>
+                <option value="dra">Agent DRA</option>
+                <option value="hydraulique">Agent Ministère Hydraulique & Assainissement</option>
+                <option value="interieur">Agent Ministère de l'Intérieur</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary">Créer l'utilisateur</button>
